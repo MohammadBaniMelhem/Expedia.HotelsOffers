@@ -130,7 +130,7 @@
     <value>Days</value>
   </data>
   <data name="lblDestinationName" xml:space="preserve">
-    <value>Destination Name</value>
+    <value>Destination City</value>
   </data>
   <data name="lblHighToLow" xml:space="preserve">
     <value>High-Low</value>
