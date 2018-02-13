@@ -1,0 +1,168 @@
+﻿@model Expedia.CodingExercise.DataType.Models.HotelOfferModel
+@using Expedia.CodingExercise.Resources
+@using (Html.BeginForm())
+{
+    <div class="row" style="padding:10px">
+        <div class="col-md-4 pull-right padding:10px; fixWidth">
+            <div class="affix">
+                <div class="form-group  col-md-6">
+                    @Html.DisplayNameFor(x => x.Filter.DestinationName)
+                    @Html.TextBoxFor(x => x.Filter.DestinationName, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group col-md-6">
+                    @Html.DisplayNameFor(x => x.Filter.LengthOfStay)
+                    @Html.TextBoxFor(x => x.Filter.LengthOfStay, new { @class = "form-control", @type = "number" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.DisplayNameFor(x => x.Filter.MinGuestRating)
+                    @Html.TextBoxFor(x => x.Filter.MinGuestRating, new { @class = "form-control", @type = "number" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.DisplayNameFor(x => x.Filter.MaxGuestRating)
+                    @Html.TextBoxFor(x => x.Filter.MaxGuestRating, new { @class = "form-control", @type = "number" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.DisplayNameFor(x => x.Filter.MinStarRating)
+                    @Html.TextBoxFor(x => x.Filter.MinStarRating, new { @class = "form-control", @type = "number" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.DisplayNameFor(x => x.Filter.MaxStarRating)
+                    @Html.TextBoxFor(x => x.Filter.MaxStarRating, new { @class = "form-control", @type = "number" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.DisplayNameFor(x => x.Filter.MinTotalRate)
+                    @Html.TextBoxFor(x => x.Filter.MinTotalRate, new { @class = "form-control", @type = "number" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.DisplayNameFor(x => x.Filter.MaxTotalRate)
+                    @Html.TextBoxFor(x => x.Filter.MaxTotalRate, new { @class = "form-control", @type = "number" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.DisplayNameFor(x => x.Filter.MinTripStartDate)
+                    @Html.TextBoxFor(x => x.Filter.MinTripStartDate, new { @class = "form-control", @type = "date" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.DisplayNameFor(x => x.Filter.MaxTripStartDate)
+                    @Html.TextBoxFor(x => x.Filter.MaxTripStartDate, new { @class = "form-control", @type = "date" })
+                </div>
+                <div class="form-group col-md-12 " style="padding:0">
+                    <div class="col-md-6">
+                        <div>&nbsp</div>
+                        @Labels.lblName
+                        <span style="font-size:12px">
+                            @Html.RadioButtonFor(x => x.Sorting.ByName, "HotelInfo.Name ASC", new { @class = "radios" })
+                            @Labels.lblAtoZ
+                        </span>
+                        <span style="font-size:12px">
+                            @Html.RadioButtonFor(x => x.Sorting.ByName, "HotelInfo.Name DESC", new { @class = "radios" })
+                            @Labels.lblZtoA
+                        </span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div>&nbsp</div>
+                        @Labels.lblPrice
+                        <span style="font-size:12px">
+                            @Html.RadioButtonFor(x => x.Sorting.ByPrice, "OfferDetails.NewPriceTotal ASC", new { @class = "radios" })
+                            @Labels.lblLowToHigh
+                        </span>
+                        <span style="font-size:12px">
+                            @Html.RadioButtonFor(x => x.Sorting.ByPrice, "OfferDetails.NewPriceTotal DESC", new { @class = "radios" })
+                            @Labels.lblHighToLow
+                        </span>
+                    </div>
+                    <div class=" col-md-6">
+                        <div>&nbsp</div>
+                        @Labels.lblRating
+                        <span style="font-size:12px">
+                            @Html.RadioButtonFor(x => x.Sorting.ByRating, "HotelInfo.StarRating ASC", new { @class = "radios" })
+                            @Labels.lblLowToHigh
+                        </span>
+                        <span style="font-size:12px">
+                            @Html.RadioButtonFor(x => x.Sorting.ByRating, "HotelInfo.StarRating DESC", new { @class = "radios" })
+                            @Labels.lblHighToLow
+                        </span>
+                    </div>
+                    <div class=" col-md-6">
+                        <div>&nbsp</div>
+                        <input type="button" value="@Labels.lblClearSorting" class="btn btn-danger fixBtnWidth" onclick="javascript:clearRadios();" />
+
+                    </div>
+                    <div class="col-md-1 text-center">
+                        <div>&nbsp</div>
+                    </div>
+                    <div class="col-md-10 text-center">
+                        <div>&nbsp</div>
+                        <input type="submit" value="@Labels.lblSearchAndSort" class="btn btn-primary fixBtnWidth text-center" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8 pull-left">
+
+            <div>
+
+                @foreach (var offer in Model.Offers)
+                {
+                    <div class="row" style="padding:5px">
+                        <div class="col-md-12 table-bordered " style="padding:15px">
+                            <article class="media">
+                                <div class="media-left col-md-1">
+                                    <img class="media-object" src="@offer.HotelInfo.ImageUrl" alt="@offer.HotelInfo.Name">
+                                </div>
+                                <div class="media-body  col-md-5">
+                                    <h4 class="media-heading">@offer.HotelInfo.Name</h4>
+                                    <input id="input-2" name="input-2" value="@offer.HotelInfo.StarRating" class=" rating-loading " data-size="xs" data-min="0" data-max="5">
+                                    <p style="font-size:10px;  color:blue;">(@offer.HotelInfo.ReviewTotal @Labels.lblReviews) </p>
+                                    <strike style="@(offer.OfferDetails.Discount>0 ? "":"display:none;") font-size:14px;  color:gray;">$@offer.OfferDetails.OldPriceTotal </strike>
+                                    <label style="font-size:14px; ">&nbsp; $@offer.OfferDetails.NewPriceTotal </label>
+                                    <label style="font-size:14px; ">@(offer.OfferDetails.Discount > 0 ? "(" + Labels.lblYouSave + " $" + offer.OfferDetails.Discount + ")" : "")  </label>
+                                    <p style="font-size:14px; "><span style="color:green;font-weight:bold"> @(offer.OfferDetails.lengthOfStay > 1 ? offer.OfferDetails.lengthOfStay + " " + Labels.lblDays : offer.OfferDetails.lengthOfStay + " " + Labels.lblDays)</span>  (@offer.OfferDetails.FromDate - @offer.OfferDetails.ToDate)</p>
+                                </div>
+                                <div class="media-body  col-md-6">
+                                    <p style="font-size:14px; "> @offer.HotelInfo.Country,  @offer.HotelInfo.Province,  @offer.HotelInfo.City, @offer.HotelInfo.StreetAddress</p>
+                                    <input type="button" class="btn btn-primary col-md-12" value="@Labels.lblShowHotelLocation" style="height:100px;" onclick="buildHotelLocationMap(this,'dvLocationMap@(offer.HotelInfo.ID)')" />
+                                    <div id="dvLocationMap@(offer.HotelInfo.ID)" data-hotel-name="@offer.HotelInfo.Name" data-lat="@offer.HotelInfo.Lat" data-long="@offer.HotelInfo.Long" style="display:none;height:100px;background-color:#428bca"></div>
+                                </div>
+                            </article>
+                        </div>
+
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+}
+
+<script>
+
+    $(document).on('ready', function () {
+        $('.rating-loading').rating({
+            displayOnly: true, step: 0.1, size: "xs", showCaption: true
+        });
+    });
+
+    function initializeMap(elm, latitude, longitude,pinTitle) {
+        var LatLng = new google.maps.LatLng(latitude, longitude);
+        var mapOptions = { center: LatLng, zoom: 15 };
+        var map = new google.maps.Map(elm, mapOptions);
+        var marker = new google.maps.Marker({ position: LatLng, map: map, title: pinTitle});
+    }
+
+    function clearRadios() {
+        var r = document.getElementsByClassName("radios");
+        for (var i = 0; i < r.length; i++) {
+            r[i].checked = false;
+        }
+    }
+    function buildHotelLocationMap($this, mapElmId) {
+        $($this).hide();
+        var $targetElm = $('#' + mapElmId);
+        $targetElm.show();
+
+        initializeMap($targetElm[0], $targetElm.data("lat"), $targetElm.data("long"), $targetElm.data("hotel-name"));
+    }
+</script>
