@@ -6,7 +6,9 @@ This project built using ASP.net MVC5 Make sure that .net framework 4.6.1, IIS 7
 
 # Prerequisites
 1- IIS 7.0 or later.
+
 2- .Net framework 4.6.1.
+
 3- Visual Studio 2017.
 
 # Running
