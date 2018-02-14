@@ -1,0 +1,4 @@
+language: csharp
+solution: Expedia.CodingExercise.sln
+script: 
+  - xbuild /p:Configuration=Release Expedia.CodingExercise.sln
